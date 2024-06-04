@@ -3,4 +3,3 @@
 GET {{backend_carhelp_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
