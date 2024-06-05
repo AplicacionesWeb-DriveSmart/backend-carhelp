@@ -52,4 +52,13 @@ public class UserController(IUserCommandService userCommandService, IUserQuerySe
         var userResource = UserResourceFromEntityAssembler.ToResourceFromEntity(user);
         return Ok(userResource);
     }
+    
+    [HttpDelete("{userId:int}")]
+    public async Task<IActionResult> DeleteUser(int userId)
+    {
+        var deleteUserResource = new DeleteUserResource(userId);
+        var deleteUserCommand = DeleteUserCommandFromResourceAssembler.ToCommandFromResource(deleteUserResource);
+        await userCommandService.Handle(deleteUserCommand);
+        return NoContent();
+    }
 }

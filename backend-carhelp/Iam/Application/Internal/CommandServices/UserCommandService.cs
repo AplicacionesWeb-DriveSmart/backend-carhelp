@@ -22,4 +22,18 @@ public class UserCommandService(IUserRepository userRepository, IUnitOfWork unit
             return null;
         }
     }
+
+    public async Task Handle(DeleteUserCommand command)
+    {
+        try
+        {
+            await userRepository.DeleteUserByIdAsync(command.Id);
+            await unitOfWork.CompleteAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"An error occurred while deleting the user: {e.Message}");
+        }
+        
+    } 
 }

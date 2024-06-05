@@ -17,4 +17,14 @@ public class UserRepository(AppDbContext context) : BaseRepository<User>(context
     {
         return Context.Set<User>().Where(p => p.Username == username).FirstOrDefaultAsync();
     }
+    
+    public async Task DeleteUserByIdAsync(int id)
+    {
+        var user = await Context.Set<User>().FindAsync(id);
+        if (user != null)
+        {
+            Context.Set<User>().Remove(user);
+            await Context.SaveChangesAsync();
+        }
+    }
 }
