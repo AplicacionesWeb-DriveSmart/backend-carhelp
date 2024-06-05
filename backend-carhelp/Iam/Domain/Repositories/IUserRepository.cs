@@ -8,4 +8,5 @@ public interface IUserRepository : IBaseRepository<User>
 {
     Task<User> FindUserByEmailAsync(EmailAddres email);
     Task<User> FindUserByUsernameAsync(string username);
+    Task DeleteUserByIdAsync(int id);
 }
