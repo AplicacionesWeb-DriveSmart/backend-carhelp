@@ -73,6 +73,11 @@ builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 builder.Services.AddScoped<IUserQueryService, UserQueryService>();
 builder.Services.AddScoped<IUserContextFacade, UsersContextFacade>();
 
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerCommandServcice, CustomerCommandService>();
+builder.Services.AddScoped<ICustomerQueryService, CustomerQueryServices>();
+builder.Services.AddScoped<ICustomerContextFacade, CustomersContextFacade>();
+
 var app = builder.Build();
 
 // Verify Database Objects area Created
