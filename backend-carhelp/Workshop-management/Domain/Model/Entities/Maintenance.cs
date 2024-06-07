@@ -1,4 +1,4 @@
-namespace backend_carhelp.Workshop_managment.Domain.Model.Entities;
+namespace backend_carhelp.Workshop_management.Domain.Model.Entities;
 
 public class Maintenance
 {

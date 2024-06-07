@@ -1,4 +1,4 @@
-namespace backend_carhelp.Workshop_managment.Domain.Model.ValueObjects;
+namespace backend_carhelp.Workshop_management.Domain.Model.ValueObjects;
 
 public class Detail
 {

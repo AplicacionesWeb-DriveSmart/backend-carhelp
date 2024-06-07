@@ -1,4 +1,4 @@
-namespace backend_carhelp.Workshop_managment.Domain.Model.Aggregates;
+namespace backend_carhelp.Workshop_management.Domain.Model.Aggregates;
 
 public class Invoice
 {

@@ -21,7 +21,6 @@
     <ItemGroup>
       <Folder Include="Workshop-management\Application\Internal\CommandServices\" />
       <Folder Include="Workshop-management\Application\Internal\QueryServices\" />
-      <Folder Include="Workshop-management\Domain\Model\Commands\" />
       <Folder Include="Workshop-management\Domain\Model\Queries\" />
       <Folder Include="Workshop-management\Domain\Repositories\" />
       <Folder Include="Workshop-management\Domain\Services\" />
