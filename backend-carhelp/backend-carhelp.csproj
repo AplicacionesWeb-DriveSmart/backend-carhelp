@@ -21,10 +21,6 @@
     <ItemGroup>
       <Folder Include="Workshop-management\Application\Internal\CommandServices\" />
       <Folder Include="Workshop-management\Application\Internal\QueryServices\" />
-      <Folder Include="Workshop-management\Domain\Model\Queries\" />
-      <Folder Include="Workshop-management\Domain\Repositories\" />
-      <Folder Include="Workshop-management\Domain\Services\" />
-      <Folder Include="Workshop-management\Infrastructure\Persistence\EFC\Repositories\" />
       <Folder Include="Workshop-management\Interfaces\ACL\Services\" />
       <Folder Include="Workshop-management\Interfaces\REST\Resources\" />
       <Folder Include="Workshop-management\Interfaces\REST\Transform\" />

@@ -1,3 +1,4 @@
+using backend_carhelp.Workshop_management.Domain.Model.Commands;
 using Org.BouncyCastle.Asn1.X509;
 
 namespace backend_carhelp.Workshop_management.Domain.Model.Aggregates;
@@ -13,7 +14,7 @@ public partial class Vehicle
     public string ImageUrl { get; set; }
     public string Mileage { get; set; }
 
-    public Vehicle(string plate, string brand, string model, string year, string color, string imageUrl, string mileage)
+    public Vehicle(string plate, string brand, string model, string year, string color, string imageUrl, string mileage) 
     {
         Plate = plate;
         Brand = brand;
@@ -23,5 +24,8 @@ public partial class Vehicle
         ImageUrl = imageUrl;
         Mileage = mileage;
     }
+    
+    public Vehicle(CreateVehicleCommand command)
+        : this(command.Plate, command.Brand, command.Model, command.Year, command.Color, command.ImageUrl, command.Mileage){}
     
 }
