@@ -9,6 +9,11 @@ using backend_carhelp.shared.Domain.Repositories;
 using backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration;
 using backend_carhelp.shared.Infrastructure.Persistence.EFC.Repositories;
 using backend_carhelp.shared.Interfaces.ASP.Configuration;
+using backend_carhelp.Workshop_management.Application.Internal.CommandServices;
+using backend_carhelp.Workshop_management.Application.Internal.QueryServices;
+using backend_carhelp.Workshop_management.Domain.Repositories;
+using backend_carhelp.Workshop_management.Domain.Services;
+using backend_carhelp.Workshop_management.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -77,6 +82,11 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerCommandServcice, CustomerCommandService>();
 builder.Services.AddScoped<ICustomerQueryService, CustomerQueryServices>();
 builder.Services.AddScoped<ICustomerContextFacade, CustomersContextFacade>();
+
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IVehicleCommandService, VehicleCommandService>();
+builder.Services.AddScoped<IVehicleQueryService, VehicleQueryService>();
+
 
 var app = builder.Build();
 
