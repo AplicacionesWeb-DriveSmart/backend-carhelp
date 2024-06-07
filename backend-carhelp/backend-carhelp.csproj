@@ -18,12 +18,4 @@
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Workshop-management\Application\Internal\CommandServices\" />
-      <Folder Include="Workshop-management\Application\Internal\QueryServices\" />
-      <Folder Include="Workshop-management\Interfaces\ACL\Services\" />
-      <Folder Include="Workshop-management\Interfaces\REST\Resources\" />
-      <Folder Include="Workshop-management\Interfaces\REST\Transform\" />
-    </ItemGroup>
-
 </Project>

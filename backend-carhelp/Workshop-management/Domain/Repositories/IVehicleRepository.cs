@@ -5,6 +5,7 @@ namespace backend_carhelp.Workshop_management.Domain.Repositories;
 
 public interface IVehicleRepository : IBaseRepository<Vehicle>
 {
-    Task<IEnumerable<Vehicle>> FindAllAsync();
-    Task<IEnumerable<Vehicle>> FindByIdAsync(int id);
+    Task<Vehicle> FindAllAsync();
+    Task<Vehicle> FindVehicleByIdAsync(int id);
+    Task<Vehicle> GetByIdAsync(int id);
 }   

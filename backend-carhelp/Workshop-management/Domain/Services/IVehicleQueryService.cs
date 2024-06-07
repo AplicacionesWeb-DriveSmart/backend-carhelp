@@ -5,6 +5,7 @@ namespace backend_carhelp.Workshop_management.Domain.Services;
 
 public interface IVehicleQueryService
 {
-    Task<Vehicle?> Handle(GetVehicleByIdQuery query);
     Task<IEnumerable<Vehicle>> Handle(GetAllVehiclesQuery query);
+    Task<Vehicle?> Handle(GetVehicleByIdQuery query);
+    
 }

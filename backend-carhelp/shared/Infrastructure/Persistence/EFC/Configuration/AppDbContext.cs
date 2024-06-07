@@ -1,6 +1,7 @@
 using backend_carhelp.Iam.Domain.Model.Aggregates;
 using backend_carhelp.Iam.Domain.Model.Entities;
 using backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using backend_carhelp.Workshop_management.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,17 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            
+            // Contexst
+            builder.Entity<Vehicle>().HasKey(v => v.Id);
+            builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
+            builder.Entity<Vehicle>().Property(v => v.Brand).HasColumnName("Brand");
+            builder.Entity<Vehicle>().Property(v => v.Year).HasColumnName("Year");
+            builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
+            builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
+            builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
+            
             // User Context
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -63,9 +74,13 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
 
             // Apply SnakeCase Naming Convention
             builder.UseSnakeCaseWithPluralizedTableNamingConvention();
+            
+            
+            
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
     }
 }
