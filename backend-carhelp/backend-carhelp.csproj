@@ -19,16 +19,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Workshop-managment\Application\Internal\CommandServices\" />
-      <Folder Include="Workshop-managment\Application\Internal\QueryServices\" />
-      <Folder Include="Workshop-managment\Domain\Model\Commands\" />
-      <Folder Include="Workshop-managment\Domain\Model\Queries\" />
-      <Folder Include="Workshop-managment\Domain\Repositories\" />
-      <Folder Include="Workshop-managment\Domain\Services\" />
-      <Folder Include="Workshop-managment\Infrastructure\Persistence\EFC\Repositories\" />
-      <Folder Include="Workshop-managment\Interfaces\ACL\Services\" />
-      <Folder Include="Workshop-managment\Interfaces\REST\Resources\" />
-      <Folder Include="Workshop-managment\Interfaces\REST\Transform\" />
+      <Folder Include="Workshop-management\Application\Internal\CommandServices\" />
+      <Folder Include="Workshop-management\Application\Internal\QueryServices\" />
+      <Folder Include="Workshop-management\Domain\Model\Queries\" />
+      <Folder Include="Workshop-management\Domain\Repositories\" />
+      <Folder Include="Workshop-management\Domain\Services\" />
+      <Folder Include="Workshop-management\Infrastructure\Persistence\EFC\Repositories\" />
+      <Folder Include="Workshop-management\Interfaces\ACL\Services\" />
+      <Folder Include="Workshop-management\Interfaces\REST\Resources\" />
+      <Folder Include="Workshop-management\Interfaces\REST\Transform\" />
     </ItemGroup>
 
 </Project>
