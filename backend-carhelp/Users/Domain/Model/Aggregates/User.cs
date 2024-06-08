@@ -1,6 +1,7 @@
 using backend_carhelp.Iam.Domain.Model.Commands;
 using backend_carhelp.Iam.Domain.Model.Entities;
 using backend_carhelp.Iam.Domain.Model.ValueObjects;
+using backend_carhelp.Users.Domain.Model.Entities;
 
 namespace backend_carhelp.Iam.Domain.Model.Aggregates;
 
@@ -54,5 +55,9 @@ public partial class User
     public string StreetAddress => Address.FullAddress;
     
     public Customer Customer { get; internal set; }
+    
+    public Workshop Workshop { get; internal set; }
+    
+    public Notification Notification { get; internal set; }
     
 }

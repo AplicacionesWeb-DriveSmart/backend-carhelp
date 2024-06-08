@@ -5,7 +5,7 @@ using backend_carhelp.Iam.Domain.Services;
 
 namespace backend_carhelp.Iam.Application.Internal.QueryServices;
 
-public class CustomerQueryServices(ICustomerRepository customerRepository) : ICustomerQueryService
+public class CustomerQueryService(ICustomerRepository customerRepository) : ICustomerQueryService
 {
     public async Task<IEnumerable<Customer>> Handle(GetAllCustomersQuery query)
     {

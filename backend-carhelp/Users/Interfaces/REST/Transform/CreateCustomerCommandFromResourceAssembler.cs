@@ -7,6 +7,6 @@ public class CreateCustomerCommandFromResourceAssembler
 {
     public static CreateCustomerCommand ToCommandFromResource(CreateCustomerResource resource)
     {
-        return new CreateCustomerCommand(resource.UserId, resource.Id);
+        return new CreateCustomerCommand(resource.UserId);
     }
 }
