@@ -1,6 +1,7 @@
 using backend_carhelp.Iam.Domain.Model.Aggregates;
 using backend_carhelp.Iam.Domain.Model.Entities;
 using backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using backend_carhelp.Users.Domain.Model.Entities;
 using backend_carhelp.Workshop_management.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -80,6 +81,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
 
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
     }
 }
