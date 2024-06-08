@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using backend_carhelp.Workshop_management.Domain.Model.Commands;
 using backend_carhelp.Workshop_management.Domain.Model.Queries;
 using backend_carhelp.Workshop_management.Domain.Services;
 using backend_carhelp.Workshop_management.Interfaces.REST.Resources;
@@ -39,5 +40,13 @@ public class InvoiceController(IInvoiceQueryService invoiceQueryService, IInvoic
         if (invoice == null) return NotFound();
         var invoiceResource = InvoiceResourceFromEntityAssembler.ToResourceFromEntity(invoice);
         return Ok(invoiceResource);
+    }
+    
+    [HttpDelete("{invoiceId:int}")]
+    public async Task<IActionResult> DeleteInvoice(int invoiceId)
+    {
+        var deleteInvoiceResource = new DeleteInvoiceCommand(invoiceId);
+        await invoiceCommandService.Handle(deleteInvoiceResource);
+        return NoContent();
     }
 }
