@@ -55,4 +55,6 @@ public partial class User
     
     public Customer Customer { get; internal set; }
     
+    public Workshop Workshop { get; internal set; }
+    
 }

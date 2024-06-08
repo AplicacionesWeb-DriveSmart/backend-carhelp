@@ -80,8 +80,13 @@ builder.Services.AddScoped<IUserContextFacade, UsersContextFacade>();
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerCommandServcice, CustomerCommandService>();
-builder.Services.AddScoped<ICustomerQueryService, CustomerQueryServices>();
+builder.Services.AddScoped<ICustomerQueryService, CustomerQueryService>();
 builder.Services.AddScoped<ICustomerContextFacade, CustomersContextFacade>();
+
+builder.Services.AddScoped<IWorkshopRepository, WorkshopRepository>();
+builder.Services.AddScoped<IWorkshopCommandService, WorkshopCommandService>();
+builder.Services.AddScoped<IWorkshopQueryService, WorkshopQueryService>();
+builder.Services.AddScoped<IWorkshopContextFacade, WorkshopContextFacade>();
 
 // Workshop Management Bounded Context Injection Configuration
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();

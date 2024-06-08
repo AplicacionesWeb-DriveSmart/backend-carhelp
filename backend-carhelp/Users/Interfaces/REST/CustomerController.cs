@@ -23,9 +23,9 @@ namespace backend_carhelp.Iam.Interfaces.REST
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCustomer(CreateCustomerResource resource, int id)
+        public async Task<IActionResult> CreateCustomer(CreateCustomerResource resource)
         {
-            var createCustomerCommand = CreateCustomerCommandFromResourceAssembler.ToCommandFromResource(resource, id);
+            var createCustomerCommand = CreateCustomerCommandFromResourceAssembler.ToCommandFromResource(resource);
             var customer = await _customerCommandService.Handle(createCustomerCommand);
             if (customer is null) return BadRequest();
             var customerResource = CustomerResourceFromEntityAssembler.ToResourceFromEntity(customer);
@@ -53,12 +53,12 @@ namespace backend_carhelp.Iam.Interfaces.REST
         
         [HttpDelete("{Id:int}")]
         
-         public async Task<IActionResult> DeleteUser(int Id)
-    {
-        var deleteCustomerResource = new DeleteCustomerResource(Id);
-        var deleteCustomerCommand = DeleteCustomerCommandFromResourcesAssembler.ToCommandFromResource(deleteCustomerResource);
-        await _customerCommandService.Handle(deleteCustomerCommand);
-        return NoContent();
-    }
+        public async Task<IActionResult> DeleteCustomer(int Id)
+        {
+            var deleteCustomerResource = new DeleteCustomerResource(Id);
+            var deleteCustomerCommand = DeleteCustomerCommandFromResourcesAssembler.ToCommandFromResource(deleteCustomerResource);
+            await _customerCommandService.Handle(deleteCustomerCommand);
+            return NoContent();
+        }
     }
 }

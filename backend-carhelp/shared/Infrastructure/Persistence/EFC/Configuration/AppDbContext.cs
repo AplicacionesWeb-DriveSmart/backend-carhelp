@@ -24,7 +24,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
             // User Context
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -61,27 +61,28 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             builder.Entity<Customer>().HasOne(c => c.User)
                 .WithOne(u => u.Customer)
                 .HasForeignKey<Customer>(c => c.UserId)
-                .HasPrincipalKey<User>(u => u.Id);
+                .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
             
-            // Workshop Management Context
-            builder.Entity<Vehicle>().HasKey(v => v.Id);
-            builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
-            builder.Entity<Vehicle>().Property(v => v.Brand).HasColumnName("Brand");
-            builder.Entity<Vehicle>().Property(v => v.Year).HasColumnName("Year");
-            builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
-            builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
-            builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
+            // Workshop Relationships
+            builder.Entity<Workshop>().HasKey(w => w.Id);
+            builder.Entity<Workshop>().Property(w => w.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Workshop>().HasOne(w => w.User)
+                .WithOne(u => u.Workshop)
+                .HasForeignKey<Workshop>(w => w.UserId)
+                .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
             
-            
+            builder.Entity<Notification>().HasKey(n => n.Id);
+
+
             // Apply SnakeCase Naming Convention
             builder.UseSnakeCaseWithPluralizedTableNamingConvention();
-            
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Workshop> Workshops { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
     }
+    
 }
