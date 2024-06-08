@@ -9,4 +9,5 @@ public static class CreateInvoiceCommandFromResourceAssembler
     {
         return new CreateInvoiceCommand(resource.Number, resource.IssueDate, resource.Total, resource.Status, resource.Detail);
     }
+    
 }
