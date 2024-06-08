@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using backend_carhelp.Iam.Interfaces.REST.Resources;
 using backend_carhelp.Iam.Interfaces.REST.Transform;
+using backend_carhelp.Workshop_management.Domain.Model.Commands;
 using backend_carhelp.Workshop_management.Domain.Model.Queries;
 using backend_carhelp.Workshop_management.Domain.Services;
 using backend_carhelp.Workshop_management.Interfaces.REST.Resources;
@@ -41,5 +42,13 @@ public class VehicleController(IVehicleQueryService vehicleQueryService, IVehicl
         if (vehicle == null) return NotFound();
         var vehicleResource = VehicleResourceFromEntityAssembler.ToResourceFromEntity(vehicle);
         return Ok(vehicleResource);
+    }
+    
+    [HttpDelete("{vehicleId:int}")]
+    public async Task<IActionResult> DeleteVehicle(int vehicleId)
+    {
+        var deleteVehicleResource = new DeleteVehicleCommand(vehicleId);
+        await vehicleCommandService.Handle(deleteVehicleResource);
+        return NoContent();
     }
 }
