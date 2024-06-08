@@ -88,6 +88,10 @@ builder.Services.AddScoped<IWorkshopCommandService, WorkshopCommandService>();
 builder.Services.AddScoped<IWorkshopQueryService, WorkshopQueryService>();
 builder.Services.AddScoped<IWorkshopContextFacade, WorkshopContextFacade>();
 
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<INotificationCommandService, NotificationCommandService>();
+builder.Services.AddScoped<INotificationQueryService, NotificationQueryService>();
+
 // Workshop Management Bounded Context Injection Configuration
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IVehicleCommandService, VehicleCommandService>();

@@ -71,7 +71,14 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
                 .HasForeignKey<Workshop>(w => w.UserId)
                 .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
             
+            // Notification Relationships
             builder.Entity<Notification>().HasKey(n => n.Id);
+            builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Notification>().HasOne(n => n.User)
+                .WithOne(u => u.Notification)
+                .HasForeignKey<Notification>(n => n.UserId)
+                .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
+            
 
 
             // Apply SnakeCase Naming Convention
