@@ -83,9 +83,14 @@ builder.Services.AddScoped<ICustomerCommandServcice, CustomerCommandService>();
 builder.Services.AddScoped<ICustomerQueryService, CustomerQueryServices>();
 builder.Services.AddScoped<ICustomerContextFacade, CustomersContextFacade>();
 
+// Workshop Management Bounded Context Injection Configuration
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IVehicleCommandService, VehicleCommandService>();
 builder.Services.AddScoped<IVehicleQueryService, VehicleQueryService>();
+
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IInvoiceCommandService, InvoiceCommandService>();
+builder.Services.AddScoped<IInvoiceQueryService, InvoiceQueryService>();
 
 
 var app = builder.Build();
@@ -97,6 +102,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
     context.Database.EnsureCreated();
+    //context.Database.EnsureDeleted();
 }
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,9 @@
 @backend_carhelp_HostAddress = http://localhost:5057
 
+GET {{backend_carhelp_HostAddress}}/api/v1/Vehicle/
+Accept: application/json
+
+###
+
 
 
