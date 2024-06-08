@@ -24,15 +24,6 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         {
             base.OnModelCreating(builder);
             
-            // Invoice Context
-            builder.Entity<Invoice>().HasKey(i => i.Id);
-            builder.Entity<Invoice>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Invoice>().Property(i => i.Number).HasColumnName("Number");
-            builder.Entity<Invoice>().Property(i => i.IssueDate).HasColumnName("IssueDate");
-            builder.Entity<Invoice>().Property(i => i.Total).HasColumnName("Total");
-            builder.Entity<Invoice>().Property(i => i.Status).HasColumnName("Status");
-            builder.Entity<Invoice>().Property(i => i.Detail).HasColumnName("Detail");
-            
             // User Context
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -72,6 +63,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
                 .HasPrincipalKey<User>(u => u.Id);
             
             // Workshop Management Context
+            // Vehicle Aggregate
             builder.Entity<Vehicle>().HasKey(v => v.Id);
             builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
@@ -85,7 +77,15 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
             builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
             builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
-
+            
+            // Invoice Aggregate
+            builder.Entity<Invoice>().HasKey(i => i.Id);
+            builder.Entity<Invoice>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Invoice>().Property(i => i.Number).HasColumnName("Number");
+            builder.Entity<Invoice>().Property(i => i.IssueDate).HasColumnName("IssueDate");
+            builder.Entity<Invoice>().Property(i => i.Total).HasColumnName("Total");
+            builder.Entity<Invoice>().Property(i => i.Status).HasColumnName("Status");
+            builder.Entity<Invoice>().Property(i => i.Detail).HasColumnName("Detail");
             
             
             // Apply SnakeCase Naming Convention
