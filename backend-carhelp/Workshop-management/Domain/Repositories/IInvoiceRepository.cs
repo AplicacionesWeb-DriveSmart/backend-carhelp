@@ -3,7 +3,8 @@ using backend_carhelp.Workshop_management.Domain.Model.Aggregates;
 
 namespace backend_carhelp.Workshop_management.Domain.Repositories;
 
-public interface IVehicleRepository : IBaseRepository<Vehicle>
+public interface IInvoiceRepository : IBaseRepository<Invoice>
 {
-    Task DeleteVehicleByIdAsync(int id);
+    Task DeleteInvoiceByIdAsync(int id);
+    
 }

@@ -9,18 +9,13 @@ namespace backend_carhelp.Workshop_management.Infrastructure.Persistence.EFC.Rep
 
 public class VehicleRepository(AppDbContext context) : BaseRepository<Vehicle>(context), IVehicleRepository
 {
-    public Task<Vehicle> FindAllAsync()
+    public async Task DeleteVehicleByIdAsync(int id)
     {
-        return null;
-    }
-
-    public Task<Vehicle> FindVehicleByIdAsync(int id)
-    {
-        return Context.Set<Vehicle>().Where(p => p.Id == id).FirstOrDefaultAsync();
-    }
-    
-     public async Task<Vehicle> GetByIdAsync(int id)
-    {
-        return await context.Vehicles.FindAsync(id);
+        var vehicle = await Context.Set<Vehicle>().FindAsync(id);
+        if (vehicle != null)
+        {
+            Context.Set<Vehicle>().Remove(vehicle);
+            await Context.SaveChangesAsync();
+        }
     }
 }

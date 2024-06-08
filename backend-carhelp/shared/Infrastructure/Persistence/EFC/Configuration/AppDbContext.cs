@@ -63,6 +63,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
                 .HasForeignKey<Customer>(c => c.UserId)
                 .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
             
+
             // Workshop Relationships
             builder.Entity<Workshop>().HasKey(w => w.Id);
             builder.Entity<Workshop>().Property(w => w.Id).IsRequired().ValueGeneratedOnAdd();
@@ -78,11 +79,39 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
                 .WithOne(u => u.Notification)
                 .HasForeignKey<Notification>(n => n.UserId)
                 .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
+
+            // Workshop Management Context
+            // Vehicle Aggregate
+            builder.Entity<Vehicle>().HasKey(v => v.Id);
+            builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
+            builder.Entity<Vehicle>().Property(v => v.Brand).HasColumnName("Brand");
+            builder.Entity<Vehicle>().OwnsOne(v => v.CarModelInfo, n =>
+            {
+                n.WithOwner().HasForeignKey("Id");
+                n.Property(v => v.Name).HasColumnName("ModelName");
+                n.Property(v => v.Year).HasColumnName("ModelYear");
+            });
+            builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
+            builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
+            builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
+            
+            // Invoice Aggregate
+            builder.Entity<Invoice>().HasKey(i => i.Id);
+            builder.Entity<Invoice>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Invoice>().Property(i => i.Number).HasColumnName("Number");
+            builder.Entity<Invoice>().Property(i => i.IssueDate).HasColumnName("IssueDate");
+            builder.Entity<Invoice>().Property(i => i.Total).HasColumnName("Total");
+            builder.Entity<Invoice>().Property(i => i.Status).HasColumnName("Status");
+            builder.Entity<Invoice>().Property(i => i.Detail).HasColumnName("Detail");
+            
+
             
 
 
             // Apply SnakeCase Naming Convention
             builder.UseSnakeCaseWithPluralizedTableNamingConvention();
+
         }
 
         public DbSet<User> Users { get; set; }
@@ -90,6 +119,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         public DbSet<Workshop> Workshops { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
     }
     
 }
