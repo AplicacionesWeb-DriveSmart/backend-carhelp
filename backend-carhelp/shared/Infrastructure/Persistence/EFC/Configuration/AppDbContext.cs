@@ -24,16 +24,6 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         {
             base.OnModelCreating(builder);
             
-            // Vehicle Context
-            builder.Entity<Vehicle>().HasKey(v => v.Id);
-            builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
-            builder.Entity<Vehicle>().Property(v => v.Brand).HasColumnName("Brand");
-            builder.Entity<Vehicle>().Property(v => v.Year).HasColumnName("Year");
-            builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
-            builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
-            builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
-            
             // Invoice Context
             builder.Entity<Invoice>().HasKey(i => i.Id);
             builder.Entity<Invoice>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
@@ -86,10 +76,16 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
             builder.Entity<Vehicle>().Property(v => v.Brand).HasColumnName("Brand");
-            builder.Entity<Vehicle>().Property(v => v.Year).HasColumnName("Year");
+            builder.Entity<Vehicle>().OwnsOne(v => v.CarModelInfo, n =>
+            {
+                n.WithOwner().HasForeignKey("Id");
+                n.Property(v => v.Name).HasColumnName("ModelName");
+                n.Property(v => v.Year).HasColumnName("ModelYear");
+            });
             builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
             builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
             builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
+
             
             
             // Apply SnakeCase Naming Convention
