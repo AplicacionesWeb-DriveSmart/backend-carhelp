@@ -88,6 +88,10 @@ builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IVehicleCommandService, VehicleCommandService>();
 builder.Services.AddScoped<IVehicleQueryService, VehicleQueryService>();
 
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IInvoiceCommandService, InvoiceCommandService>();
+builder.Services.AddScoped<IInvoiceQueryService, InvoiceQueryService>();
+
 
 var app = builder.Build();
 
