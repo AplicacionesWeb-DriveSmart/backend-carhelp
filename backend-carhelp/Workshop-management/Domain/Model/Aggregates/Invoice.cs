@@ -11,6 +11,7 @@ public partial class Invoice
         Total = string.Empty;
         Status = string.Empty;
         Detail = string.Empty;
+        
     }
     public Invoice(string number, string issueDate, string total, string status, string detail) 
     {
