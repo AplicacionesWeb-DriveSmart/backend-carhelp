@@ -5,5 +5,5 @@ namespace backend_carhelp.Workshop_management.Domain.Repositories;
 
 public interface IInvoiceRepository : IBaseRepository<Invoice>
 {
-    Task<Invoice> GetByIdAsync(int id);
+    Task DeleteInvoiceByIdAsync(int id);
 }

@@ -22,4 +22,17 @@ public class InvoiceCommandService(IInvoiceRepository invoiceRepository, IUnitOf
             return null;
         }
     }
+
+    public async Task Handle(DeleteInvoiceCommand command)
+    {
+        try
+        {
+            await invoiceRepository.DeleteInvoiceByIdAsync(command.Id);
+            await unitOfWork.CompleteAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"An error occurred while deleting the invoice: {e.Message}");
+        }
+    }
 }

@@ -23,4 +23,17 @@ public class VehicleCommandService(IVehicleRepository vehicleRepository, IUnitOf
             return null;
         }
     }
+
+    public async Task Handle(DeleteVehicleCommand command)
+    {
+        try
+        {
+            await vehicleRepository.DeleteVehicleByIdAsync(command.Id);
+            await unitOfWork.CompleteAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"An error occurred while deleting the vehicle: {e.Message}");
+        }
+    }
 }
