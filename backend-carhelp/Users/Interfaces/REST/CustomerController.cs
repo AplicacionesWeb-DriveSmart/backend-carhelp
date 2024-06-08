@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace backend_carhelp.Iam.Interfaces.REST
 {
     [ApiController]
-    [Route("apiv1/[controller]")]
+    [Route("api/v1/[controller]")]
     [Produces(MediaTypeNames.Application.Json)]
     public class CustomerController : ControllerBase
     {

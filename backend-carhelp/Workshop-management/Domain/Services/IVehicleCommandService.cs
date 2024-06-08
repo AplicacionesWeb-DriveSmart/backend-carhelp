@@ -6,4 +6,5 @@ namespace backend_carhelp.Workshop_management.Domain.Services;
 public interface IVehicleCommandService
 {
     Task<Vehicle?> Handle(CreateVehicleCommand command);
+    Task Handle(DeleteVehicleCommand command);
 }
