@@ -13,13 +13,17 @@ public class NotificationCommandService : INotificationCommandService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
     private INotificationCommandService _notificationCommandServiceImplementation;
+    private readonly ICustomerRepository _customerRepository;
+    private readonly IWorkshopRepository _workshopRepository;
 
 
-    public NotificationCommandService(INotificationRepository notificationRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
+    public NotificationCommandService(INotificationRepository notificationRepository, IUnitOfWork unitOfWork, IUserRepository userRepository,  ICustomerRepository customerRepository, IWorkshopRepository workshopRepository)
     {
         _notificationRepository = notificationRepository;
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
+        _customerRepository = customerRepository;
+        _workshopRepository = workshopRepository;
     }
 
 
@@ -32,6 +36,21 @@ public class NotificationCommandService : INotificationCommandService
             return null;
         }
 
+        var customer = await _customerRepository.GetByUserIdAsync(command.UserId);
+        if (customer != null)
+        {
+            Console.WriteLine($"User with Id {command.UserId} is already a customer.");
+            return null;
+        }
+        
+        var workshop = await _workshopRepository.GetByUserIdAsync(command.UserId);
+        if (workshop != null)
+        {
+            Console.WriteLine($"User with Id {command.UserId} is already a workshop.");
+            return null;
+        }
+        
+        
         var notification = new Notification
         {
             UserId = command.UserId

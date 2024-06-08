@@ -7,4 +7,5 @@ namespace backend_carhelp.Iam.Domain.Repositories;
 public interface INotificationRepository : IBaseRepository<Notification>
 {
     Task DeleteNotificationByIdAsync(int Id);
+    Task<Notification> GetByUserIdAsync(int UserId);
 }

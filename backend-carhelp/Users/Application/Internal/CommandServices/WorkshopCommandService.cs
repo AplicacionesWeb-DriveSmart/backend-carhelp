@@ -12,12 +12,17 @@ public class WorkshopCommandService : IWorkshopCommandService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;  
     private IWorkshopCommandService _workshopCommandServciceImplementation;
-    
-    public WorkshopCommandService(IWorkshopRepository workshopRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
+    private readonly ICustomerRepository _customerRepository;
+    private readonly INotificationRepository _notificationRepository;
+
+    public WorkshopCommandService(IWorkshopRepository workshopRepository, IUnitOfWork unitOfWork, IUserRepository userRepository, ICustomerRepository customerRepository, INotificationRepository notificationRepository)
     {
         _workshopRepository = workshopRepository;
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
+        _customerRepository = customerRepository; // Agregar esto
+        _notificationRepository = notificationRepository; // Agregar esto
+
     }
 
     public async Task<Workshop?> Handle(CreateWorkshopCommand command)
@@ -26,6 +31,20 @@ public class WorkshopCommandService : IWorkshopCommandService
         if (user == null)
         {
             Console.WriteLine($"User with Id {command.UserId} does not exist.");
+            return null;
+        }
+        
+        var customer = await _customerRepository.GetByUserIdAsync(command.UserId);
+        if (customer != null)
+        {
+            Console.WriteLine($"User with Id {command.UserId} is already a customer.");
+            return null;
+        }
+        
+        var notification = await _notificationRepository.GetByUserIdAsync(command.UserId);
+        if (notification != null)
+        {
+            Console.WriteLine($"User with Id {command.UserId} is already a notification.");
             return null;
         }
 

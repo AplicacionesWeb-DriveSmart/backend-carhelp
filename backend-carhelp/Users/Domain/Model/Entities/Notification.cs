@@ -24,7 +24,16 @@ public class Notification
         UserId = userId;
     }
     
-    public Notification(){}
+    public Notification()
+    {
+        Type = string.Empty;
+        Title = string.Empty;
+        Message = string.Empty;
+        Timestamp = string.Empty;
+        Read = false;
+        UserId = 0;
+        
+    }
 
     public Notification(CreateNotificationCommand command) 
         : this(command.Type, command.Title, command.Message, command.Timestamp, command.Read, command.UserId) {}

@@ -19,9 +19,9 @@ public class NotificationRepository(AppDbContext context) : BaseRepository<Notif
         }
     }
 
-    public async Task<Notification> GetByIdAsync(int id)
+    public async Task<Notification?> GetByUserIdAsync(int userId)
     {
-        return await context.Notifications.FindAsync(id);
+        return await Context.Notifications.FirstOrDefaultAsync(n => n.UserId == userId);
     }
 
     public async Task<IEnumerable<Notification>> GetAllNotifications() =>

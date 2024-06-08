@@ -12,12 +12,16 @@ public class CustomerCommandService : ICustomerCommandServcice
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;  
     private ICustomerCommandServcice _customerCommandServciceImplementation;
+    private readonly IWorkshopRepository _workshopRepository;
+    private readonly INotificationRepository _notificationRepository;
 
-    public CustomerCommandService(ICustomerRepository customerRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
+    public CustomerCommandService(ICustomerRepository customerRepository, IUnitOfWork unitOfWork, IUserRepository userRepository,  IWorkshopRepository workshopRepository, INotificationRepository notificationRepository)
     {
         _customerRepository = customerRepository;
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
+        _workshopRepository = workshopRepository;
+        _notificationRepository = notificationRepository;
     }
 
     public async Task<Customer?> Handle(CreateCustomerCommand command)
@@ -29,6 +33,20 @@ public class CustomerCommandService : ICustomerCommandServcice
             return null;
         }
 
+        var workshop = await _workshopRepository.GetByUserIdAsync(command.UserId);
+        if (workshop != null)
+        {
+            Console.WriteLine($"User with Id {command.UserId} is already a workshop.");
+            return null;
+        }
+        
+        var notification = await _notificationRepository.GetByUserIdAsync(command.UserId);
+        if (notification != null)
+        {
+            Console.WriteLine($"User with Id {command.UserId} is already a notification.");
+            return null;
+        }
+        
         var customer = new Customer
         {
             UserId = command.UserId
