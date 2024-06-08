@@ -53,12 +53,12 @@ namespace backend_carhelp.Iam.Interfaces.REST
         
         [HttpDelete("{Id:int}")]
         
-         public async Task<IActionResult> DeleteUser(int Id)
-    {
-        var deleteCustomerResource = new DeleteCustomerResource(Id);
-        var deleteCustomerCommand = DeleteCustomerCommandFromResourcesAssembler.ToCommandFromResource(deleteCustomerResource);
-        await _customerCommandService.Handle(deleteCustomerCommand);
-        return NoContent();
-    }
+        public async Task<IActionResult> DeleteCustomer(int Id)
+        {
+            var deleteCustomerResource = new DeleteCustomerResource(Id);
+            var deleteCustomerCommand = DeleteCustomerCommandFromResourcesAssembler.ToCommandFromResource(deleteCustomerResource);
+            await _customerCommandService.Handle(deleteCustomerCommand);
+            return NoContent();
+        }
     }
 }

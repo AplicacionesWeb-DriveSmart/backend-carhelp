@@ -7,7 +7,7 @@ public class CustomersContextFacade(ICustomerCommandServcice customerCommandServ
 {
     public async Task<int> CreateCustomer(int userId, int id)
     {
-        var createCustomerCommand = new CreateCustomerCommand(userId, id);
+        var createCustomerCommand = new CreateCustomerCommand(userId);
         var customer = await customerCommandService.Handle(createCustomerCommand);
         return customer?.Id ?? 0;
     }

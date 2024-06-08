@@ -1,6 +1,7 @@
 using backend_carhelp.Iam.Domain.Model.Aggregates;
 using backend_carhelp.Iam.Domain.Model.Entities;
 using backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using backend_carhelp.Users.Domain.Model.Entities;
 using backend_carhelp.Workshop_management.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
             // User Context
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -60,8 +61,25 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             builder.Entity<Customer>().HasOne(c => c.User)
                 .WithOne(u => u.Customer)
                 .HasForeignKey<Customer>(c => c.UserId)
-                .HasPrincipalKey<User>(u => u.Id);
+                .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
             
+
+            // Workshop Relationships
+            builder.Entity<Workshop>().HasKey(w => w.Id);
+            builder.Entity<Workshop>().Property(w => w.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Workshop>().HasOne(w => w.User)
+                .WithOne(u => u.Workshop)
+                .HasForeignKey<Workshop>(w => w.UserId)
+                .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
+            
+            // Notification Relationships
+            builder.Entity<Notification>().HasKey(n => n.Id);
+            builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Notification>().HasOne(n => n.User)
+                .WithOne(u => u.Notification)
+                .HasForeignKey<Notification>(n => n.UserId)
+                .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
+
             // Workshop Management Context
             // Vehicle Aggregate
             builder.Entity<Vehicle>().HasKey(v => v.Id);
@@ -87,17 +105,21 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             builder.Entity<Invoice>().Property(i => i.Status).HasColumnName("Status");
             builder.Entity<Invoice>().Property(i => i.Detail).HasColumnName("Detail");
             
+
             
+
+
             // Apply SnakeCase Naming Convention
             builder.UseSnakeCaseWithPluralizedTableNamingConvention();
-            
-            
-            
+
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Workshop> Workshops { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
     }
+    
 }
