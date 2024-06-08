@@ -49,4 +49,5 @@ public class InvoiceController(IInvoiceQueryService invoiceQueryService, IInvoic
         await invoiceCommandService.Handle(deleteInvoiceResource);
         return NoContent();
     }
+    
 }

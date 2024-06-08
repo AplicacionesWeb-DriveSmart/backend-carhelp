@@ -7,4 +7,5 @@ public interface IInvoiceCommandService
 {
     Task<Invoice?> Handle(CreateInvoiceCommand command);
     Task Handle(DeleteInvoiceCommand command);
+    
 }
