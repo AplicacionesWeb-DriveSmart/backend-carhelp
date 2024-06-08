@@ -23,9 +23,9 @@ namespace backend_carhelp.Iam.Interfaces.REST
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCustomer(CreateCustomerResource resource)
+        public async Task<IActionResult> CreateCustomer(CreateCustomerResource resource, int id)
         {
-            var createCustomerCommand = CreateCustomerCommandFromResourceAssembler.ToCommandFromResource(resource);
+            var createCustomerCommand = CreateCustomerCommandFromResourceAssembler.ToCommandFromResource(resource, id);
             var customer = await _customerCommandService.Handle(createCustomerCommand);
             if (customer is null) return BadRequest();
             var customerResource = CustomerResourceFromEntityAssembler.ToResourceFromEntity(customer);

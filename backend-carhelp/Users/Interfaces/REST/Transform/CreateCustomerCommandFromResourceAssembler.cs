@@ -5,8 +5,8 @@ namespace backend_carhelp.Iam.Interfaces.REST.Transform;
 
 public class CreateCustomerCommandFromResourceAssembler
 {
-    public static CreateCustomerCommand ToCommandFromResource(CreateCustomerResource resource)
+    public static CreateCustomerCommand ToCommandFromResource(CreateCustomerResource resource, int id)
     {
-        return new CreateCustomerCommand(resource.UserId, resource.Id);
+        return new CreateCustomerCommand(resource.UserId, id);
     }
 }
