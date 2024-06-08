@@ -27,8 +27,5 @@ public partial class Vehicle
     public string Colour { get; set; }
     public string ImageUrl { get; set; }
     public string Mileage { get; set; }
-
-    
-    
     
 }
