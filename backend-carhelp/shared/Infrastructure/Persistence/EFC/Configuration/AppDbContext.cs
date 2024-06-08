@@ -24,16 +24,6 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         {
             base.OnModelCreating(builder);
             
-            // Contexst
-            builder.Entity<Vehicle>().HasKey(v => v.Id);
-            builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
-            builder.Entity<Vehicle>().Property(v => v.Brand).HasColumnName("Brand");
-            builder.Entity<Vehicle>().Property(v => v.Year).HasColumnName("Year");
-            builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
-            builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
-            builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
-            
             // User Context
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -70,8 +60,34 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             builder.Entity<Customer>().HasOne(c => c.User)
                 .WithOne(u => u.Customer)
                 .HasForeignKey<Customer>(c => c.UserId)
-                .HasPrincipalKey<Iam.Domain.Model.Aggregates.User>(u => u.Id);
-
+                .HasPrincipalKey<User>(u => u.Id);
+            
+            // Workshop Management Context
+            // Vehicle Aggregate
+            builder.Entity<Vehicle>().HasKey(v => v.Id);
+            builder.Entity<Vehicle>().Property(v => v.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Vehicle>().Property(v => v.Plate).HasColumnName("Plate");
+            builder.Entity<Vehicle>().Property(v => v.Brand).HasColumnName("Brand");
+            builder.Entity<Vehicle>().OwnsOne(v => v.CarModelInfo, n =>
+            {
+                n.WithOwner().HasForeignKey("Id");
+                n.Property(v => v.Name).HasColumnName("ModelName");
+                n.Property(v => v.Year).HasColumnName("ModelYear");
+            });
+            builder.Entity<Vehicle>().Property(v => v.Colour).HasColumnName("Colour");
+            builder.Entity<Vehicle>().Property(v => v.ImageUrl).HasColumnName("ImageUrl");
+            builder.Entity<Vehicle>().Property(v => v.Mileage).HasColumnName("Mileage");
+            
+            // Invoice Aggregate
+            builder.Entity<Invoice>().HasKey(i => i.Id);
+            builder.Entity<Invoice>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Invoice>().Property(i => i.Number).HasColumnName("Number");
+            builder.Entity<Invoice>().Property(i => i.IssueDate).HasColumnName("IssueDate");
+            builder.Entity<Invoice>().Property(i => i.Total).HasColumnName("Total");
+            builder.Entity<Invoice>().Property(i => i.Status).HasColumnName("Status");
+            builder.Entity<Invoice>().Property(i => i.Detail).HasColumnName("Detail");
+            
+            
             // Apply SnakeCase Naming Convention
             builder.UseSnakeCaseWithPluralizedTableNamingConvention();
             
@@ -82,5 +98,6 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
     }
 }
