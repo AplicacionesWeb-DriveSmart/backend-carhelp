@@ -1,30 +1,31 @@
-using backend_carhelp.Iam.Domain.Model.Aggregates;
 using backend_carhelp.Iam.Domain.Model.Commands;
 using backend_carhelp.Iam.Domain.Model.Entities;
-using backend_carhelp.Iam.Domain.Model.ValueObjects;
 using backend_carhelp.Iam.Domain.Repositories;
 using backend_carhelp.Iam.Domain.Services;
 using backend_carhelp.shared.Domain.Repositories;
 
-public class CustomerCommandService : ICustomerCommandServcice
+namespace backend_carhelp.Iam.Application.Internal.CommandServices;
+
+public class WorkshopCommandService : IWorkshopCommandService
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly IWorkshopRepository _workshopRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;  
-    private ICustomerCommandServcice _customerCommandServciceImplementation;
-    private readonly IWorkshopRepository _workshopRepository;
+    private IWorkshopCommandService _workshopCommandServciceImplementation;
+    private readonly ICustomerRepository _customerRepository;
     private readonly INotificationRepository _notificationRepository;
 
-    public CustomerCommandService(ICustomerRepository customerRepository, IUnitOfWork unitOfWork, IUserRepository userRepository,  IWorkshopRepository workshopRepository, INotificationRepository notificationRepository)
+    public WorkshopCommandService(IWorkshopRepository workshopRepository, IUnitOfWork unitOfWork, IUserRepository userRepository, ICustomerRepository customerRepository, INotificationRepository notificationRepository)
     {
-        _customerRepository = customerRepository;
+        _workshopRepository = workshopRepository;
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
-        _workshopRepository = workshopRepository;
-        _notificationRepository = notificationRepository;
+        _customerRepository = customerRepository; // Agregar esto
+        _notificationRepository = notificationRepository; // Agregar esto
+
     }
 
-    public async Task<Customer?> Handle(CreateCustomerCommand command)
+    public async Task<Workshop?> Handle(CreateWorkshopCommand command)
     {
         var user = await _userRepository.GetByIdAsync(command.UserId);
         if (user == null)
@@ -32,11 +33,11 @@ public class CustomerCommandService : ICustomerCommandServcice
             Console.WriteLine($"User with Id {command.UserId} does not exist.");
             return null;
         }
-
-        var workshop = await _workshopRepository.GetByUserIdAsync(command.UserId);
-        if (workshop != null)
+        
+        var customer = await _customerRepository.GetByUserIdAsync(command.UserId);
+        if (customer != null)
         {
-            Console.WriteLine($"User with Id {command.UserId} is already a workshop.");
+            Console.WriteLine($"User with Id {command.UserId} is already a customer.");
             return null;
         }
         
@@ -46,17 +47,17 @@ public class CustomerCommandService : ICustomerCommandServcice
             Console.WriteLine($"User with Id {command.UserId} is already a notification.");
             return null;
         }
-        
-        var customer = new Customer
+
+        var workshop = new Workshop()
         {
             UserId = command.UserId
             
         };
         try
         {
-            await _customerRepository.AddAsync(customer);
+            await _workshopRepository.AddAsync(workshop);
             await _unitOfWork.CompleteAsync();
-            return customer;
+            return workshop;
         }
         catch (Exception e)
         {
@@ -64,12 +65,12 @@ public class CustomerCommandService : ICustomerCommandServcice
             return null;
         }
     }
-    
-    public async Task Handle(DeleteCustomerCommand command)
+
+    public async Task Handle(DeleteWorkshopCommand command)
     {
         try
         {
-            await _customerRepository.DeleteCustomerByIdAsync(command.Id);
+            await _workshopRepository.DeleteWorkshopByIdAsync(command.Id);
           
             await _unitOfWork.CompleteAsync();
         }
@@ -78,6 +79,5 @@ public class CustomerCommandService : ICustomerCommandServcice
             Console.WriteLine($"An error occurred while deleting the user: {e.Message}");
         }
     }
-
     
 }
