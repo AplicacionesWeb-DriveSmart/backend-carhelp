@@ -101,6 +101,14 @@ builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IInvoiceCommandService, InvoiceCommandService>();
 builder.Services.AddScoped<IInvoiceQueryService, InvoiceQueryService>();
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
+builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
+
+builder.Services.AddScoped<IAdvertasingRepository, AdvertasingRepository>();
+builder.Services.AddScoped<IAdvertasingCommandService, AdvertasingCommandService>();
+builder.Services.AddScoped<IAdvertasingQueryService, AdvertasingQueryService>();
+
 
 var app = builder.Build();
 
