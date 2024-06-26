@@ -12,6 +12,16 @@ namespace backend_carhelp.Workshop_management.Interfaces.REST;
 [Produces(MediaTypeNames.Application.Json)]
 public class ProductController(IProductCommandService productCommandService, IProductQueryService productQueryService): ControllerBase
 {
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAllProduct()
+    {
+        var getAllProductQuery = new GetAllProductQuery();
+        var products = await productQueryService.Handle(getAllProductQuery);
+        var productResource = products.Select(ProductResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(productResource);
+    }
+    
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetProductById(int id)
     {

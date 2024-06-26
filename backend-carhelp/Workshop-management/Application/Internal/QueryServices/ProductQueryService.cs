@@ -7,6 +7,10 @@ namespace backend_carhelp.Workshop_management.Application.Internal.QueryServices
 
 public class ProductQueryService(IProductRepository productRepository): IProductQueryService
 {
+    public async Task<IEnumerable<Product>> Handle(GetAllProductQuery query)
+    {
+        return await productRepository.ListAsync();
+    }
     public async Task<Product?> Handle(GetProductByIdQuery query)
     {
         return await productRepository.FindByIdAsync(query.ProductId);

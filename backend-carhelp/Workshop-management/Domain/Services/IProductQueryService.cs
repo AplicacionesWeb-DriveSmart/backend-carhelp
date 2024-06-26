@@ -5,5 +5,6 @@ namespace backend_carhelp.Workshop_management.Domain.Services;
 
 public interface IProductQueryService
 {
+    Task<IEnumerable<Product>> Handle(GetAllProductQuery query);
     Task<Product> Handle(GetProductByIdQuery query);
 }
