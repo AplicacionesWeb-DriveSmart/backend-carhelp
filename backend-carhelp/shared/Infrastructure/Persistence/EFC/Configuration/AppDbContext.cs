@@ -117,6 +117,18 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
                 entity.Property(i => i.WorkshopId).HasColumnName("WorkshopId");
             });
             
+            //Advertasing Aggregate
+            builder.Entity<Advertasing>(entity =>
+            {
+                entity.HasKey(i => i.Id);
+                entity.Property(i => i.Id).ValueGeneratedOnAdd();
+                entity.Property(i => i.Name).HasColumnName("Name");
+                entity.Property(i => i.ImageUrl).HasColumnName("Quantity");
+                entity.Property(i => i.Slogan).HasColumnName("Price");
+                entity.Property(i => i.Message).HasColumnName("ImageUrl");
+                entity.Property(i => i.WorkshopId).HasColumnName("WorkshopId");
+            });
+            
 
 
             // Apply SnakeCase Naming Convention
