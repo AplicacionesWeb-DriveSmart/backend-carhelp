@@ -105,7 +105,17 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             builder.Entity<Invoice>().Property(i => i.Status).HasColumnName("Status");
             builder.Entity<Invoice>().Property(i => i.Detail).HasColumnName("Detail");
             
-
+            //Product Aggregate
+            builder.Entity<Product>(entity =>
+            {
+                entity.HasKey(i => i.Id);
+                entity.Property(i => i.Id).ValueGeneratedOnAdd();
+                entity.Property(i => i.Name).HasColumnName("Name");
+                entity.Property(i => i.Quantity).HasColumnName("Quantity");
+                entity.Property(i => i.Price).HasColumnName("Price");
+                entity.Property(i => i.ImageUrl).HasColumnName("ImageUrl");
+                entity.Property(i => i.WorkshopId).HasColumnName("WorkshopId");
+            });
             
 
 
@@ -120,6 +130,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
     
 }
