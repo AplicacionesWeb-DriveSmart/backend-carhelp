@@ -3,8 +3,8 @@ using backend_carhelp.Workshop_management.Domain.Model.Queries;
 
 namespace backend_carhelp.Workshop_management.Domain.Services;
 
-public interface IAdvertasingQueryService
+public interface IAdvertisingQueryService
 {
-    Task<IEnumerable<Advertasing>> Handle(GetAllAdvertasingQuery query);
-    Task<Advertasing> Handle(GetAdvertasingByIdQuery query);
+    Task<IEnumerable<Advertising>> Handle(GetAllAdvertisingQuery query);
+    Task<Advertising> Handle(GetAdvertisingByIdQuery query);
 }

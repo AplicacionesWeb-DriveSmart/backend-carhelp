@@ -2,7 +2,7 @@ using backend_carhelp.Workshop_management.Domain.Model.Commands;
 
 namespace backend_carhelp.Workshop_management.Domain.Model.Aggregates;
 
-public class Advertasing
+public class Advertising
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -11,7 +11,7 @@ public class Advertasing
     public string Message{ get; set; }
     public int WorkshopId{ get; set; }
 
-    public Advertasing()
+    public Advertising()
     {
         Name= string.Empty;
         ImageUrl= string.Empty;
@@ -20,7 +20,7 @@ public class Advertasing
         WorkshopId = 0;
     }
     
-    public Advertasing(string name, string imageUrl, string slogan, string message, int workshopId) {
+    public Advertising(string name, string imageUrl, string slogan, string message, int workshopId) {
         Name = name;
         ImageUrl = imageUrl;
         Slogan = slogan;
@@ -28,12 +28,12 @@ public class Advertasing
         WorkshopId = workshopId;
     }
 
-    public Advertasing(CreateAdvertasingCommand createAdvertasingCommand)
+    public Advertising(CreateAdvertisingCommand createAdvertisingCommand)
     {
-        Name = createAdvertasingCommand.Name;
-        ImageUrl = createAdvertasingCommand.ImageUrl;
-        Slogan = createAdvertasingCommand.Slogan;
-        Message = createAdvertasingCommand.Message;
-        WorkshopId = createAdvertasingCommand.WorkshopId;
+        Name = createAdvertisingCommand.Name;
+        ImageUrl = createAdvertisingCommand.ImageUrl;
+        Slogan = createAdvertisingCommand.Slogan;
+        Message = createAdvertisingCommand.Message;
+        WorkshopId = createAdvertisingCommand.WorkshopId;
     }
 }

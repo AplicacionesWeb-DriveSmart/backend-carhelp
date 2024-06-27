@@ -5,7 +5,7 @@ using backend_carhelp.Workshop_management.Domain.Repositories;
 
 namespace backend_carhelp.Workshop_management.Infrastructure.Persistence.EFC.Repositories;
 
-public class AdvertasingRepository(AppDbContext context): BaseRepository<Advertasing>(context),IAdvertasingRepository
+public class AdvertisingRepository(AppDbContext context): BaseRepository<Advertising>(context),IAdvertisingRepository
 {
     
 }

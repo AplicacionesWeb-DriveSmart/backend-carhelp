@@ -118,7 +118,7 @@ namespace backend_carhelp.shared.Infrastructure.Persistence.EFC.Configuration
             });
             
             //Advertasing Aggregate
-            builder.Entity<Advertasing>(entity =>
+            builder.Entity<Advertising>(entity =>
             {
                 entity.HasKey(i => i.Id);
                 entity.Property(i => i.Id).ValueGeneratedOnAdd();

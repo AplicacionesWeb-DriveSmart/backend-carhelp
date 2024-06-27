@@ -11,40 +11,40 @@ namespace backend_carhelp.Workshop_management.Interfaces.REST;
 [ApiController]
 [Route("/api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class AdvertasingController(IAdvertasingCommandService advertasingCommandService, IAdvertasingQueryService advertasingQueryService): ControllerBase
+public class AdvertisingController(IAdvertisingCommandService advertisingCommandService, IAdvertisingQueryService advertisingQueryService): ControllerBase
 {
     
     [HttpGet]
     public async Task<IActionResult> GetAllAdvertasing()
     {
-        var getAllAdvertasingQuery = new GetAllAdvertasingQuery();
-        var advertasings = await advertasingQueryService.Handle(getAllAdvertasingQuery);
-        var advertasingResource = advertasings.Select(AdvertasingResourceFromEntityAssembler.ToResourceFromEntity);
+        var getAllAdvertasingQuery = new GetAllAdvertisingQuery();
+        var advertasings = await advertisingQueryService.Handle(getAllAdvertasingQuery);
+        var advertasingResource = advertasings.Select(AdvertisingResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(advertasingResource);
     }
     
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAdvertasingById(int id)
     {
-        var getAdvertasingByIdQuery = new GetAdvertasingByIdQuery(id);
-        var advertasing = await advertasingQueryService.Handle(getAdvertasingByIdQuery);
+        var getAdvertasingByIdQuery = new GetAdvertisingByIdQuery(id);
+        var advertasing = await advertisingQueryService.Handle(getAdvertasingByIdQuery);
         if(advertasing == null) {
             return NotFound();
         }
-        var advertasingResource = AdvertasingResourceFromEntityAssembler.ToResourceFromEntity(advertasing);
+        var advertasingResource = AdvertisingResourceFromEntityAssembler.ToResourceFromEntity(advertasing);
         return Ok(advertasingResource);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAdvertasing(CreateAdvertasingResource resource)
+    public async Task<IActionResult> CreateAdvertasing(CreateAdvertisingResource resource)
     {
-        var createAdvertasingCommand = CreateAdvertasingCommandFromResourceAssembler.ToCommandFromResource(resource);
-        var advertasing = await advertasingCommandService.Handle(createAdvertasingCommand);
+        var createAdvertasingCommand = CreateAdvertisingCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var advertasing = await advertisingCommandService.Handle(createAdvertasingCommand);
         if (advertasing == null)
         {
             return BadRequest();
         }
-        var advertasingResource = AdvertasingResourceFromEntityAssembler.ToResourceFromEntity(advertasing);
+        var advertasingResource = AdvertisingResourceFromEntityAssembler.ToResourceFromEntity(advertasing);
         return CreatedAtAction(nameof(GetAdvertasingById), new { id = advertasingResource.Id }, advertasingResource);
     }
 }

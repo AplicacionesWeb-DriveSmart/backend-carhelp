@@ -6,20 +6,20 @@ using backend_carhelp.Workshop_management.Domain.Services;
 
 namespace backend_carhelp.Workshop_management.Application.Internal.CommandServices;
 
-public class AdvertasingCommandService(IAdvertasingRepository advertasingRepository, IUnitOfWork unitOfWork): IAdvertasingCommandService
+public class AdvertisingCommandService(IAdvertisingRepository advertisingRepository, IUnitOfWork unitOfWork): IAdvertisingCommandService
 {
-    public async Task<Advertasing?> Handle(CreateAdvertasingCommand command)
+    public async Task<Advertising?> Handle(CreateAdvertisingCommand command)
     {
-        var advertasing = new Advertasing(command);
+        var advertising = new Advertising(command);
         try
         {
-            await advertasingRepository.AddAsync(advertasing);
+            await advertisingRepository.AddAsync(advertising);
             await unitOfWork.CompleteAsync();
-            return advertasing;
+            return advertising;
         }
         catch (Exception e)
         {
-            Console.WriteLine($"An error occurred while creating the advertasing: {e.Message}");
+            Console.WriteLine($"An error occurred while creating the advertising: {e.Message}");
             return null;
         }
     }

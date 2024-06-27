@@ -3,8 +3,8 @@ using backend_carhelp.Workshop_management.Interfaces.REST.Resources;
 
 namespace backend_carhelp.Workshop_management.Interfaces.REST.Transform;
 
-public static class AdvertasingResourceFromEntityAssembler
+public static class AdvertisingResourceFromEntityAssembler
 {
-    public static AdvertasingResource ToResourceFromEntity(Advertasing entity) =>
+    public static AdvertasingResource ToResourceFromEntity(Advertising entity) =>
         new AdvertasingResource(entity.Id, entity.Name, entity.ImageUrl, entity.Slogan, entity.Message, entity.WorkshopId);
 }

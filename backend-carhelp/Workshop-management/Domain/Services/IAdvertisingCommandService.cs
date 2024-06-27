@@ -3,7 +3,7 @@ using backend_carhelp.Workshop_management.Domain.Model.Commands;
 
 namespace backend_carhelp.Workshop_management.Domain.Services;
 
-public interface IAdvertasingCommandService
+public interface IAdvertisingCommandService
 {
-    Task<Advertasing?> Handle(CreateAdvertasingCommand command);
+    Task<Advertising?> Handle(CreateAdvertisingCommand command);
 }

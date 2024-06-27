@@ -105,9 +105,9 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
 builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
 
-builder.Services.AddScoped<IAdvertasingRepository, AdvertasingRepository>();
-builder.Services.AddScoped<IAdvertasingCommandService, AdvertasingCommandService>();
-builder.Services.AddScoped<IAdvertasingQueryService, AdvertasingQueryService>();
+builder.Services.AddScoped<IAdvertisingRepository, AdvertisingRepository>();
+builder.Services.AddScoped<IAdvertisingCommandService, AdvertisingCommandService>();
+builder.Services.AddScoped<IAdvertisingQueryService, AdvertisingQueryService>();
 
 
 var app = builder.Build();
