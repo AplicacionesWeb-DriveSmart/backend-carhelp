@@ -53,7 +53,7 @@ public class UserController(IUserCommandService userCommandService, IUserQuerySe
         return Ok(userResource);
     }
     
-    [HttpDelete("{userId:int}")]
+    [HttpDelete("{Id:int}")]
     public async Task<IActionResult> DeleteUser(int userId)
     {
         var deleteUserResource = new DeleteUserResource(userId);

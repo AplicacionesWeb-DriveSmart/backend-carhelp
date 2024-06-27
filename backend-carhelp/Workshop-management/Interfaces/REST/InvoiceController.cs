@@ -42,7 +42,7 @@ public class InvoiceController(IInvoiceQueryService invoiceQueryService, IInvoic
         return Ok(invoiceResource);
     }
     
-    [HttpDelete("{invoiceId:int}")]
+    [HttpDelete("{Id:int}")]
     public async Task<IActionResult> DeleteInvoice(int invoiceId)
     {
         var deleteInvoiceResource = new DeleteInvoiceCommand(invoiceId);

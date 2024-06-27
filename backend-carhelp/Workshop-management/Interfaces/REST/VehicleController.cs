@@ -44,7 +44,7 @@ public class VehicleController(IVehicleQueryService vehicleQueryService, IVehicl
         return Ok(vehicleResource);
     }
     
-    [HttpDelete("{vehicleId:int}")]
+    [HttpDelete("{Id:int}")]
     public async Task<IActionResult> DeleteVehicle(int vehicleId)
     {
         var deleteVehicleResource = new DeleteVehicleCommand(vehicleId);
